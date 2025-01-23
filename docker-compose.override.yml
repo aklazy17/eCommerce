@@ -1,0 +1,91 @@
+# Reusable configuration blocks
+x-common-env: &common-env
+  ASPNETCORE_ENVIRONMENT: Development
+  EUREKA__CLIENT__SERVICEURL: http://eureka-server:8761/eureka/
+
+x-rabbitmq-env: &rabbitmq-env
+  RABBITMQ__HOSTNAME: rabbitmq
+  RABBITMQ__PORT: 5672
+  RABBITMQ__USERNAME: guest
+  RABBITMQ__PASSWORD: guest
+
+services:
+  ecommerce.product.api:
+    environment:
+      <<: [*common-env, *rabbitmq-env] # Merge common and RabbitMQ-specific variables
+      ASPNETCORE_HTTP_PORTS: 5001
+      CONNECTIONSTRINGS__PRODUCTDBCONNECTION: Server=mssql-server,1433;Database=ProductDb;User Id=sa;Password=@Password12;TrustServerCertificate=True;
+      EUREKA__INSTANCE__APPNAME: product-api
+      EUREKA__INSTANCE__PORT: 5001
+    ports:
+      - "5001:5001"
+
+  ecommerce.productdetail.api:
+    environment:
+      <<: *common-env
+      ASPNETCORE_HTTP_PORTS: 5002
+      CONNECTIONSTRINGS__PRODUCTDETAILDBCONNECTION: Server=mssql-server,1433;Database=ProductDetailDb;User Id=sa;Password=@Password12;TrustServerCertificate=True;
+      EUREKA__INSTANCE__APPNAME: product-detail-api
+      EUREKA__INSTANCE__PORT: 5002
+    ports:
+      - "5002:5002"
+
+  ecommerce.inventory.api:
+    environment:
+      <<: [*common-env, *rabbitmq-env] # Merge common and RabbitMQ-specific variables
+      ASPNETCORE_HTTP_PORTS: 5003
+      CONNECTIONSTRINGS__INVENTORYDBCONNECTION: Server=mssql-server,1433;Database=InventoryDb;User Id=sa;Password=@Password12;TrustServerCertificate=True;
+      EUREKA__INSTANCE__APPNAME: inventory-api
+      EUREKA__INSTANCE__PORT: 5003
+    ports:
+      - "5003:5003"
+
+  ecommerce.cart.api:
+    environment:
+      <<: [*common-env, *rabbitmq-env] # Merge common and RabbitMQ-specific variables
+      ASPNETCORE_HTTP_PORTS: 5004
+      CONNECTIONSTRINGS__CARTDBCONNECTION: Server=mssql-server,1433;Database=CartDb;User Id=sa;Password=@Password12;TrustServerCertificate=True;
+      EUREKA__INSTANCE__APPNAME: cart-api
+      EUREKA__INSTANCE__PORT: 5004
+    ports:
+      - "5004:5004"
+
+  ecommerce.notification.api:
+    environment:
+      <<: [*common-env, *rabbitmq-env] # Merge common and RabbitMQ-specific variables
+      ASPNETCORE_HTTP_PORTS: 5005
+      CONNECTIONSTRINGS__NOTIFICATIONDBCONNECTION: Server=mssql-server,1433;Database=NotificationDb;User Id=sa;Password=@Password12;TrustServerCertificate=True;
+      EUREKA__INSTANCE__APPNAME: notification-api
+      EUREKA__INSTANCE__PORT: 5005
+    ports:
+      - "5005:5005"
+
+  ecommerce.ocelotapigateway:
+    environment:
+      <<: *common-env
+      ASPNETCORE_HTTP_PORTS: 5006
+      EUREKA__CLIENT__REGISTER-WITH-EUREKA: false
+      EUREKA__INSTANCE__APPNAME: ocelot-api-gateway
+      EUREKA__INSTANCE__PORT: 5006
+    ports:
+      - "5006:5006"
+
+  eureka-server:
+    environment:
+      EUREKA__CLIENT__REGISTER-WITH-EUREKA: false
+      EUREKA__CLIENT__FETCH-REGISTRY: false
+      EUREKA__INSTANCE__HOSTNAME: localhost
+    ports:
+      - "8761:8761"
+
+  rabbitmq:
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  mssql-server:
+    environment:
+      - ACCEPT_EULA=Y # Accept the SQL Server EULA
+      - SA_PASSWORD=@Password12 # Set a SA password
+    ports:
+      - "1433:1433"

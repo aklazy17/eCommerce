@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "ecommerce.product.api": "StartDebugging",
+        "ecommerce.productdetail.api": "StartDebugging",
+        "ecommerce.inventory.api": "StartDebugging",
+        "ecommerce.cart.api": "StartDebugging",
+        "ecommerce.notification.api": "StartDebugging",
+        "ecommerce.ocelotapigateway": "StartDebugging"
+      },
+      "environmentVariables": {
+        "DOCKER_REGISTRY": "amit728/"
+      }
+    }
+  }
+}

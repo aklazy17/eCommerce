@@ -1,0 +1,306 @@
+{
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 5126,
+      "Type": "Eureka"
+    }
+  },
+  "Routes": [
+    {
+      "ServiceName": "product-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/product",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/product",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "product"
+    },
+    {
+      "ServiceName": "product-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/product/{id}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/product/{id}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "product"
+    },
+    {
+      "ServiceName": "product-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/product/{name}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/product/{name}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "product"
+    },
+    {
+      "ServiceName": "product-detail-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/productdetail",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/productdetail",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "productDetail"
+    },
+    {
+      "ServiceName": "product-detail-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/productdetail/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/productdetail/{id}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "productDetail"
+    },
+    {
+      "ServiceName": "product-detail-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/productdetail/getbyproductid/{productId}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/productdetail/getbyproductid/{productId}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "productDetail"
+    },
+    {
+      "ServiceName": "product-detail-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/productdetail/{productId}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/productdetail/{productId}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "productDetail"
+    },
+    {
+      "ServiceName": "inventory-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/inventory",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/inventory",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "inventory"
+    },
+    {
+      "ServiceName": "inventory-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/inventory/{productId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/inventory/{productId}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "inventory"
+    },
+    {
+      "ServiceName": "inventory-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/inventory/quantity/{productId}/{quantity}/add",
+      "UpstreamHttpMethod": [ "Put" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/inventory/quantity/{productId}/{quantity}/add",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "inventory"
+    },
+    {
+      "ServiceName": "inventory-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/inventory/quantity/{productId}/{quantity}/update",
+      "UpstreamHttpMethod": [ "Put" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/inventory/quantity/{productId}/{quantity}/update",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "inventory"
+    },
+    {
+      "ServiceName": "cart-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/order",
+      "UpstreamHttpMethod": [ "Get" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/order",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "cart"
+    },
+    {
+      "ServiceName": "cart-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/order/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/order/{id}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "cart"
+    },
+    {
+      "ServiceName": "cart-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/order/AddToCart/{orderId}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/order/AddToCart/{orderId}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "cart"
+    },
+    {
+      "ServiceName": "cart-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/order/RemoveCart/{orderId}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/order/RemoveCart/{orderId}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "cart"
+    },
+    {
+      "ServiceName": "cart-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/order/RemoveCartItem/{orderId}/{orderDetailId}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/order/RemoveCartItem/{orderId}/{orderDetailId}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "cart"
+    },
+    {
+      "ServiceName": "cart-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/order/Checkout/{orderId}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/order/Checkout/{orderId}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "cart"
+    },
+    {
+      "ServiceName": "notification-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/notification",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/notification",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "notification"
+    },
+    {
+      "ServiceName": "notification-api",
+      "UseServiceDiscovery": true,
+      "UpstreamPathTemplate": "/api/notification/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      },
+      "DownstreamPathTemplate": "/api/notification/{id}",
+      "DownstreamScheme": "http",
+      "SwaggerKey": "notification"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "product",
+      "Config": [
+        {
+          "Name": "Product API",
+          "Version": "v1",
+          "Service": {
+            "Name": "product-api",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
+    },
+    {
+      "Key": "productDetail",
+      "Config": [
+        {
+          "Name": "Product Detail API",
+          "Version": "v1",
+          "Service": {
+            "Name": "product-detail-api",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
+    },
+    {
+      "Key": "inventory",
+      "Config": [
+        {
+          "Name": "Inventory API",
+          "Version": "v1",
+          "Service": {
+            "Name": "inventory-api",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
+    },
+    {
+      "Key": "cart",
+      "Config": [
+        {
+          "Name": "Cart API",
+          "Version": "v1",
+          "Service": {
+            "Name": "cart-api",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
+    },
+    {
+      "Key": "notification",
+      "Config": [
+        {
+          "Name": "Notification API",
+          "Version": "v1",
+          "Service": {
+            "Name": "notification-api",
+            "Path": "/swagger/v1/swagger.json"
+          }
+        }
+      ]
+    }
+  ]
+}
