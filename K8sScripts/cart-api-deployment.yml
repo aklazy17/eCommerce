@@ -1,0 +1,64 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommercecartapi-deployment
+  labels:
+    app: ecommercecartapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ecommercecartapi
+  template:
+    metadata:
+      labels:
+        app: ecommercecartapi
+    spec:
+      containers:
+      - name: ecommercecartapi
+        image: amit728/ecommercecartapi:1.0.0
+        ports:
+        - containerPort: 5004
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: ASPNETCORE_URLS
+          value: "http://*:5004"
+        - name: CONNECTIONSTRINGS__CARTDBCONNECTION
+          value: "Server=mssql;Database=CartDb;User=sa;Password=@Password12;TrustServerCertificate=True;"
+        - name: SERVICEURLS__INVENTORYENDPOINT
+          value: "http://inventory-api"
+        - name: EUREKA__CLIENT__SERVICEURL
+          value: "http://eureka-server:8761/eureka/"
+        - name: EUREKA__INSTANCE__APPNAME
+          value: "cart-api"
+        - name: EUREKA__INSTANCE__PORT
+          value: "5004"
+        - name: RABBITMQ__HOSTNAME
+          value: "rabbitmq"
+        - name: RABBITMQ__PORT
+          value: "5672"
+        - name: RABBITMQ__USERNAME
+          value: "guest"
+        - name: RABBITMQ__PASSWORD
+          value: "guest"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommercecartapi-service
+spec:
+  selector:
+    app: ecommercecartapi
+  ports:
+    - protocol: TCP
+      port: 5004
+      targetPort: 5004
+  type: ClusterIP

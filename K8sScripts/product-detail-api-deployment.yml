@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerceproductdetailapi-deployment
+  labels:
+    app: ecommerceproductdetailapi
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ecommerceproductdetailapi
+  template:
+    metadata:
+      labels:
+        app: ecommerceproductdetailapi
+    spec:
+      containers:
+      - name: ecommerceproductdetailapi
+        image: amit728/ecommerceproductdetailapi:1.0.0
+        ports:
+        - containerPort: 5002
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: ASPNETCORE_URLS
+          value: "http://*:5002"
+        - name: CONNECTIONSTRINGS__PRODUCTDETAILDBCONNECTION
+          value: "Server=mssql;Database=ProductDetailDb;User=sa;Password=@Password12;TrustServerCertificate=True;"
+        - name: EUREKA__CLIENT__SERVICEURL
+          value: "http://eureka-server:8761/eureka/"
+        - name: EUREKA__INSTANCE__APPNAME
+          value: "productdetail-api"
+        - name: EUREKA__INSTANCE__PORT
+          value: "5002"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerceproductdetailapi-service
+spec:
+  selector:
+    app: ecommerceproductdetailapi
+  ports:
+    - protocol: TCP
+      port: 5002
+      targetPort: 5002
+  type: ClusterIP
