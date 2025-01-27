@@ -21,15 +21,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "K8sScripts", "K8sScripts", "{52B2D132-95D7-4802-91DC-07B4863596D4}"
 	ProjectSection(SolutionItems) = preProject
-		K8sScripts\cart-api-deployment.yml = K8sScripts\cart-api-deployment.yml
-		K8sScripts\eureka-server-deployment.yml = K8sScripts\eureka-server-deployment.yml
-		K8sScripts\inventory-api-deployment.yml = K8sScripts\inventory-api-deployment.yml
-		K8sScripts\mssql-deployment.yml = K8sScripts\mssql-deployment.yml
-		K8sScripts\notification-api-deployment.yml = K8sScripts\notification-api-deployment.yml
-		K8sScripts\ocelot-api-gateway-deployment.yml = K8sScripts\ocelot-api-gateway-deployment.yml
-		K8sScripts\product-api-deployment.yml = K8sScripts\product-api-deployment.yml
-		K8sScripts\product-detail-api-deployment.yml = K8sScripts\product-detail-api-deployment.yml
-		K8sScripts\rabbitmq-deployment.yml = K8sScripts\rabbitmq-deployment.yml
+		K8sScripts\000-common-config.yml = K8sScripts\000-common-config.yml
+		K8sScripts\001-product-deployment.yml = K8sScripts\001-product-deployment.yml
+		K8sScripts\002-product-detail-deployment.yml = K8sScripts\002-product-detail-deployment.yml
+		K8sScripts\003-inventory-deployment.yml = K8sScripts\003-inventory-deployment.yml
+		K8sScripts\004-cart-deployment.yml = K8sScripts\004-cart-deployment.yml
+		K8sScripts\005-notification-deployment.yml = K8sScripts\005-notification-deployment.yml
+		K8sScripts\006-ocelot-api-gateway-deployment.yml = K8sScripts\006-ocelot-api-gateway-deployment.yml
+		K8sScripts\007-mssql-deployment.yml = K8sScripts\007-mssql-deployment.yml
+		K8sScripts\008-rabbitmq-config-map.yml = K8sScripts\008-rabbitmq-config-map.yml
+		K8sScripts\008-rabbitmq-deployment.yml = K8sScripts\008-rabbitmq-deployment.yml
+		K8sScripts\009-eureka-server-config-map.yml = K8sScripts\009-eureka-server-config-map.yml
+		K8sScripts\009-eureka-server-deployment.yml = K8sScripts\009-eureka-server-deployment.yml
 	EndProjectSection
 EndProject
 Global

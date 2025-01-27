@@ -21,15 +21,31 @@ spec:
         - containerPort: 5002
         env:
         - name: ASPNETCORE_ENVIRONMENT
-          value: "Production"
+          valueFrom:
+            configMapKeyRef:
+              name: common-config
+              key: ASPNETCORE_ENVIRONMENT
         - name: ASPNETCORE_URLS
           value: "http://*:5002"
         - name: CONNECTIONSTRINGS__PRODUCTDETAILDBCONNECTION
           value: "Server=mssql;Database=ProductDetailDb;User=sa;Password=@Password12;TrustServerCertificate=True;"
         - name: EUREKA__CLIENT__SERVICEURL
-          value: "http://eureka-server:8761/eureka/"
+          valueFrom:
+            configMapKeyRef:
+              name: eureka-config
+              key: EUREKA__CLIENT__SERVICEURL
+        - name: EUREKA__CLIENT__SHOULDFETCHREGISTRY
+          value: "true"
+        - name: EUREKA__CLIENT__SHOULDREGISTERWITHEUREKA
+          value: "true"
+        - name: EUREKA__INSTANCE__IPADDRESS
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: EUREKA__INSTANCE__PREFERIPADDRESS
+          value: "true"
         - name: EUREKA__INSTANCE__APPNAME
-          value: "productdetail-api"
+          value: "product-detail-api"
         - name: EUREKA__INSTANCE__PORT
           value: "5002"
         resources:
@@ -49,6 +65,6 @@ spec:
     app: ecommerceproductdetailapi
   ports:
     - protocol: TCP
-      port: 5002
+      port: 80
       targetPort: 5002
   type: ClusterIP

@@ -21,7 +21,10 @@ spec:
         - containerPort: 5004
         env:
         - name: ASPNETCORE_ENVIRONMENT
-          value: "Production"
+          valueFrom:
+            configMapKeyRef:
+              name: common-config
+              key: ASPNETCORE_ENVIRONMENT
         - name: ASPNETCORE_URLS
           value: "http://*:5004"
         - name: CONNECTIONSTRINGS__CARTDBCONNECTION
@@ -29,19 +32,44 @@ spec:
         - name: SERVICEURLS__INVENTORYENDPOINT
           value: "http://inventory-api"
         - name: EUREKA__CLIENT__SERVICEURL
-          value: "http://eureka-server:8761/eureka/"
+          valueFrom:
+            configMapKeyRef:
+              name: eureka-config
+              key: EUREKA__CLIENT__SERVICEURL
+        - name: EUREKA__CLIENT__SHOULDFETCHREGISTRY
+          value: "true"
+        - name: EUREKA__CLIENT__SHOULDREGISTERWITHEUREKA
+          value: "true"
+        - name: EUREKA__INSTANCE__IPADDRESS
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: EUREKA__INSTANCE__PREFERIPADDRESS
+          value: "true"
         - name: EUREKA__INSTANCE__APPNAME
           value: "cart-api"
         - name: EUREKA__INSTANCE__PORT
           value: "5004"
         - name: RABBITMQ__HOSTNAME
-          value: "rabbitmq"
+          valueFrom:
+            configMapKeyRef:
+              name: rabbitmq-config
+              key: RABBITMQ__HOSTNAME
         - name: RABBITMQ__PORT
-          value: "5672"
+          valueFrom:
+            configMapKeyRef:
+              name: rabbitmq-config
+              key: RABBITMQ__PORT
         - name: RABBITMQ__USERNAME
-          value: "guest"
+          valueFrom:
+            configMapKeyRef:
+              name: rabbitmq-config
+              key: RABBITMQ__USERNAME
         - name: RABBITMQ__PASSWORD
-          value: "guest"
+          valueFrom:
+            configMapKeyRef:
+              name: rabbitmq-config
+              key: RABBITMQ__PASSWORD
         resources:
           requests:
             memory: "256Mi"
@@ -59,6 +87,6 @@ spec:
     app: ecommercecartapi
   ports:
     - protocol: TCP
-      port: 5004
+      port: 80
       targetPort: 5004
   type: ClusterIP

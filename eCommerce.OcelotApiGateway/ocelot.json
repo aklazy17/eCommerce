@@ -1,8 +1,8 @@
 {
   "GlobalConfiguration": {
     "ServiceDiscoveryProvider": {
-      "Host": "localhost",
-      "Port": 5126,
+      "Host": "eureka-server",
+      "Port": 8761,
       "Type": "Eureka"
     }
   },

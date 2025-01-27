@@ -5,7 +5,7 @@ metadata:
   labels:
     app: ecommerceocelotapigateway
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: ecommerceocelotapigateway
@@ -16,16 +16,26 @@ spec:
     spec:
       containers:
       - name: ecommerceocelotapigateway
-        image: amit728/ecommerceocelotapigateway:1.0.0
+        image: amit728/ecommerceocelotapigateway:1.0.1
         ports:
         - containerPort: 5006
         env:
         - name: ASPNETCORE_ENVIRONMENT
-          value: "Production"
+          valueFrom:
+            configMapKeyRef:
+              name: common-config
+              key: ASPNETCORE_ENVIRONMENT
         - name: ASPNETCORE_URLS
           value: "http://*:5006"
         - name: EUREKA__CLIENT__SERVICEURL
-          value: "http://eureka-server:8761/eureka/"
+          valueFrom:
+            configMapKeyRef:
+              name: eureka-config
+              key: EUREKA__CLIENT__SERVICEURL
+        - name: EUREKA__CLIENT__SHOULDFETCHREGISTRY
+          value: "true"
+        - name: EUREKA__CLIENT__SHOULDREGISTERWITHEUREKA
+          value: "false"
         - name: EUREKA__INSTANCE__APPNAME
           value: "ocelot-api-gateway"
         - name: EUREKA__INSTANCE__PORT
@@ -47,6 +57,6 @@ spec:
     app: ecommerceocelotapigateway
   ports:
     - protocol: TCP
-      port: 5006
+      port: 80
       targetPort: 5006
   type: ClusterIP
