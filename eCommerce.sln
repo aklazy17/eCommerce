@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "K8sScripts", "K8sScripts", 
 		K8sScripts\005-notification-deployment.yml = K8sScripts\005-notification-deployment.yml
 		K8sScripts\006-ocelot-api-gateway-deployment.yml = K8sScripts\006-ocelot-api-gateway-deployment.yml
 		K8sScripts\007-mssql-deployment.yml = K8sScripts\007-mssql-deployment.yml
+		K8sScripts\007-mssql-volume.yml = K8sScripts\007-mssql-volume.yml
 		K8sScripts\008-rabbitmq-config-map.yml = K8sScripts\008-rabbitmq-config-map.yml
 		K8sScripts\008-rabbitmq-deployment.yml = K8sScripts\008-rabbitmq-deployment.yml
 		K8sScripts\009-eureka-server-config-map.yml = K8sScripts\009-eureka-server-config-map.yml
