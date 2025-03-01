@@ -17,6 +17,7 @@ The solution comprises the following microservices:
 
 ## Infrastructure Components
 
+- **Steeltoe Eureka Server**: Provides dynamic service discovery for microservices.
 - **RabbitMQ (`eCommerce.RabbitMq`)**: Facilitates asynchronous communication between microservices.
 - **Kubernetes Scripts (`K8sScripts`)**: Contains Kubernetes deployment and service configuration files for orchestrating the microservices.
 
@@ -29,6 +30,10 @@ Ensure you have the following installed:
 - [Kubernetes](https://kubernetes.io/docs/setup/) (or [Minikube](https://minikube.sigs.k8s.io/docs/start/) for local development)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
 - [Helm](https://helm.sh/docs/intro/install/)
+
+## Service Discovery with Steeltoe Eureka
+
+We use **Steeltoe Eureka Server** for service registration and discovery. This allows microservices to register dynamically and communicate without hard-coded endpoints, improving scalability and fault tolerance.
 
 ## Getting Started
 
@@ -79,6 +84,7 @@ helm install rabbitmq bitnami/rabbitmq
 ```
 
 ## Acknowledgements
+- [**Steeltoe Eureka**](https://docs.steeltoe.io/guides/service-discovery/eureka.html?tabs=cli) for service discovery.
 - [**Ocelot**](https://ocelot.readthedocs.io/en/latest/) for the API Gateway implementation.
 - [**RabbitMQ**](https://www.rabbitmq.com/) for message brokering.
 - [**Kubernetes**](https://kubernetes.io/) for orchestration.
